@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  #root to: redirect("/ideas")
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root 'articles#index'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  get '/article' , to: 'articles#index'
 end
