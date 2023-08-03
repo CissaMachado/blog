@@ -17,10 +17,28 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to @article
     else
-      #redirect_to new_article_path(@article)
-      render :new
+    respond_to do |format|
+    format.html { render :new, status: :unprocessable_entity }
+    #render :new
+     end
     end
   end
+
+  def edit
+    @article = Article.find(params[:id])
+  end
+
+  def update 
+    @article = Article.find(params[:id])
+
+    if @article.update(article_params)
+      redirect_to @article
+    else
+    respond_to do |format|
+    format.html { render :edit, status: :unprocessable_entity }
+     end
+  end
+end
 
   private 
   def article_params
