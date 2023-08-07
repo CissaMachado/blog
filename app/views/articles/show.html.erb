@@ -1,10 +1,22 @@
-<div>
-  <h1><%= @article.title %></h1>
-    <p><%= @article.body %></p>   
-<ul>
-<li><p> <%=link_to 'Back', root_path%> </p></li>
-  <li><%= link_to "Edit", edit_article_path(@article) %></li>
-  <%= button_to "Destroy this idea", @article, method: :delete %>
 
-</ul> 
+<div class="container mt-5"> <!-- Adiciona espaçamento do topo -->
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <article class="blog-post">
+        <h2 class="blog-post-title"><%= @article.title %></h2>
+        <p class="blog-post-meta"><%= day_month_year(@article.created_at) %> <a href="#">Chris</a></p>
+        <p><%= @article.body %></p>
+
+        <div class="btn-group" role="group">
+          <%= link_to 'Back', root_path, class: "btn btn btn-info btn-sm" %>
+        </div>
+        <div class="btn-group" role="group">
+          <%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary btn-sm" %>
+        </div>
+        <div class="btn-group" role="group">
+          <%= button_to "Destroy this idea", @article, method: :delete, class: "btn btn-secondary btn-sm" %>
+        </div>
+      </article>
+    </div>
+  </div>
 </div>
