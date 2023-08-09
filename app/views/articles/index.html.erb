@@ -1,9 +1,10 @@
-<%= render 'articles/long_featured' %>
+<%= render 'long_featured', article: @recent_posts.first %>
 
-  <div class="row mb-2">
-    <%= render 'articles/medium_featured' %>
-    <%= render 'articles/medium_featured' %>
-  </div>
+<div class="row mb-2">
+  <% @recent_posts.drop(1).each do |post| %>
+    <%= render 'medium_featured', article: post %>
+  <% end %>
+</div>
   <div class="row g-5">
     <div class="col-md-8">
       <h3 class="pb-4 mb-4 fst-italic border-bottom">
