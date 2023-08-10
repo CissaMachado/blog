@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_article, only: %i[show edit update destroy]
   def index
     @recent_posts = Article.order(created_at: :desc).limit(3)
