@@ -73,4 +73,5 @@ group :test do
   gem 'webdrivers'
 end
 
+gem "devise"
 gem "simple_form", "~> 5.2"
