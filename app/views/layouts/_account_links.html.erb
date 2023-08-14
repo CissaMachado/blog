@@ -1,0 +1,16 @@
+<% if user_signed_in? %>
+  <!-- Example single danger button -->
+  <div class="dropdown">
+  <button type="button" class="btn btn-primary btn-sm dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   <%= current_user.email%>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <%= link_to 'Edit user', edit_user_registration_path, class: 'dropdown-item'%>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>
+<% else %>
+  <a class="btn btn-outline-primary mr-2" href="#">Login</a>
+  <a class="btn btn-outline-success" href="#">Subscribe</a>
+<% end %>

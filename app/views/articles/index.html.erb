@@ -1,5 +1,5 @@
-<%= render 'long_featured', article: @recent_posts.first %>
 
+<%= render 'long_featured', article: @recent_posts.first %>
 <div class="row mb-2">
   <% @recent_posts.drop(1).each do |post| %>
     <%= render 'medium_featured', article: post %>
