@@ -7,7 +7,9 @@ class ArticlesController < ApplicationController
     @articles = Article.all
   end
 
-  def show; end
+  def show
+    @articles = Article.includes(comments: :user).find(params[:id])
+  end
 
   def new
     @article = current_user.articles.new

@@ -4,12 +4,17 @@ class CommentsController < ApplicationController
   def create
     @comment = @article.comments.create(comments_params)
     @comment.user = current_user
-    @comment.save
     if @comment.save
       redirect_to article_path(@article), notice: 'Comment was successfully created.'
     else
       render :new, status: :unprocessable_entity, notice: 'comment não publicado'
     end
+  end
+
+  def destroy
+    @comment.destroy
+
+    redirect_to idea_path(@article), notice: 'Comment was successfully destroyed.'
   end
 
   private
