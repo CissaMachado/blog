@@ -1,15 +1,32 @@
 <div class="col-md-12">
-  <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+  <div
+    class="
+      row
+      g-0
+      border
+      rounded
+      overflow-hidden
+      flex-md-row
+      mb-4
+      shadow-sm
+      h-md-250
+      position-relative
+    "
+  >
     <div class="col p-4 d-flex flex-column position-static">
-      <h3 class="mb-0"><%= article.title %> </h3>
+      <h3 class="mb-0"><%= article.title %>
+      </h3>
       <div class="mb-1 text-muted"><%= day_month_year(article.created_at) %></div>
       <% if article.user.email.present? %>
-        <a href="mailto:<%= article.user.email %>" class="text-decoration-none text-primary"><%= article.user.email %></a>
+        <a
+          href="mailto:<%= article.user.email %>"
+          class="text-decoration-none text-primary"
+        ><%= article.user.email %></a>
       <% else %>
         User email not available
       <% end %>
       <p><%= truncate(article.body, length: 300) %></p>
-      <p><%= link_to 'Continue reading...', article %></p>
+      <p><%= link_to "Continue reading...", article %></p>
     </div>
   </div>
 </div>
