@@ -9,6 +9,7 @@ class ArticlesController < ApplicationController
 
   def show
     @articles = Article.includes(comments: :user).find(params[:id])
+    # @articles.shift(3)
     @comments = @article.comments
   end
 
@@ -37,9 +38,11 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article.destroy
-
-    redirect_to root_path
+    if @article.destroy
+      redirect_to root_path, notice: 'Articles Destroyed'
+    else
+      redirect_to root_path, alert: 'Articles not Destroyed'
+    end
   end
 
   private
