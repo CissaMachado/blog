@@ -29,12 +29,13 @@
                 <%= comment.user.email %>
               </div>
               <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                  <p><%= comment.body %></p>
-                  <footer class="blockquote-footer">
-                    <%= comment.created_at.strftime("%B %d, %Y") %>
-                  </footer>
-                </blockquote>
+                <p class="card-text"><%= comment.body %></p>
+                <div class="btn-group" role="group">
+                  <%= button_to "Destroy this comment",
+                  article_comment_path(@article, comment),
+                  method: :delete,
+                  class: "btn btn-secondary btn-sm" %>
+                </div>
               </div>
             </div>
           <% end %>

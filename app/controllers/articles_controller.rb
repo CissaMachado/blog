@@ -9,6 +9,7 @@ class ArticlesController < ApplicationController
 
   def show
     @articles = Article.includes(comments: :user).find(params[:id])
+    @comments = @article.comments
   end
 
   def new
@@ -48,6 +49,10 @@ class ArticlesController < ApplicationController
   end
 
   def set_article
-    @article = Article.find(params[:id])
+    @article = Article.find_by(id: params[:id])
+
+    return unless @article.nil?
+
+    redirect_to articles_path, alert: 'Article not found.'
   end
 end
