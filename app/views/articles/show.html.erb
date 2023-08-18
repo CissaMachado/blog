@@ -8,6 +8,14 @@
           -
           <%= @article.user.email %></p>
         <p><%= @article.body %></p>
+        <p><%= @article.body %></p>
+        <p>
+          <% if @article.picture.present? %>
+            <%= image_tag(@article.picture_url, width: 600)%>
+          <% else %>
+            <%= image_tag "placeholder_image.jpg", class: "placeholder-image" %>
+          <% end %>
+        </p>
 
         <div class="btn-group" role="group">
           <%= link_to "Back", root_path, class: "btn btn btn-info btn-sm" %>

@@ -8,8 +8,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @articles = Article.includes(comments: :user).find(params[:id])
-    # @articles.shift(3)
+    @article = Article.includes(comments: :user).find(params[:id])
     @comments = @article.comments
   end
 
@@ -23,6 +22,7 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to @article
     else
+      puts @article.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end
@@ -33,9 +33,11 @@ class ArticlesController < ApplicationController
     if @article.update(article_params)
       redirect_to @article
     else
+      puts @article.errors.full_messages # Imprime mensagens de erro no console
       render :edit, status: :unprocessable_entity
     end
   end
+  
 
   def destroy
     if @article.destroy
@@ -48,7 +50,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :body)
+    params.require(:article).permit(:title, :body, :picture)
   end
 
   def set_article
