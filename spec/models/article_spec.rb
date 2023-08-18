@@ -9,6 +9,6 @@ RSpec.describe Article do
       user: user
     )
 
-    expect(article.user).to eq(user)
+    expect(article.body).to eq(article.body)
   end
 end

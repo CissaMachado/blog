@@ -14,6 +14,6 @@ RSpec.describe Comment do
       user: user
     )
 
-    expect(comment.article).to eq(article)
+    expect(comment.user).to eq(user)
   end
 end
