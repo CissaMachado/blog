@@ -1,22 +1,38 @@
-<div class="container-flouid">
-  <nav class="navbar navbar-expand-lg bg-light">
+<div class="navbar-wrapper">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="/">
+      <%= link_to root_path, class: "navbar-brand" do %>
         <h3>Your Logo</h3>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <% end %>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        </ul>
-        <form class="">
-          <%= link_to "New Article", new_article_path, class: "btn btn btn-outline-secondary mr-2"%>
-          <a class="btn btn-outline-primary mr-2" href="#">Login</a>
-          <a class="btn btn-outline-success" href="#">Subscribe</a>
-        </form>
 
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto">
+          <!-- Adicione os links responsivos aqui -->
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <% if user_signed_in? %>
+              <div class="d-flex align-items-center">
+                <div class="nav-link">Logged in as <strong><%= current_user.email %></strong>.</div>
+                <%= link_to "New Article", new_article_path, class: "nav-link btn btn-outline-secondary btn-sm mx-2" %>
+                <%= link_to "Edit profile", edit_user_registration_path, class: "nav-link" %>
+                <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link btn btn-link" %>
+              </div>
+            <% else %>
+              <div class="d-flex align-items-center">
+                <%= link_to "Sign up", new_user_registration_path, class: "nav-link btn btn-outline-success btn-sm mx-2" %>
+                <%= link_to "Login", new_user_session_path, class: "nav-link btn btn-outline-primary btn-sm mx-2" %>
+              </div>
+            <% end %>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
 </div>
+
