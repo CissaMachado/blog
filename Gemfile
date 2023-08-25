@@ -76,7 +76,6 @@ end
 
 gem 'carrierwave'
 gem 'mini_magick'
-
 gem 'devise'
 gem 'erb-formatter'
 gem 'simple_form', '~> 5.2'
