@@ -1,34 +1,21 @@
 <div class="col-md-6">
-  <div
-    class="
-      row
-      g-0
-      border
-      rounded
-      overflow-hidden
-      flex-md-row
-      mb-4
-      shadow-sm
-      h-md-250
-      position-relative
-    "
-  >
+  <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
     <div class="col p-4 d-flex flex-column position-static">
-      <h3 class="mb-0"><%= article.title %></h3>
+      <h3 class="mb-0"><%= article.title%></h3>
       <div class="mb-1 text-muted"><%= day_month_year(article.created_at) %></div>
       <p class="card-text mb-auto"><%= truncate(article.body, length: 150) %></p>
-      <%= link_to "Continue reading...", article_path(article), class: "text-dark" %>
+      <%= link_to 'Continue reading...', article_path(article), class: 'text-dark' %>
     </div>
     <div class="col-auto d-none d-lg-block">
-      <title>Placeholder</title>
-      <p>
-          <% if article.picture.present? %>
-            <%= image_tag(article.picture_url, width: 600)%>
-          <% else %>
-            <%= image_tag "placeholder_image.jpg", class: "placeholder-image" %>
-          <% end %>
-        </p>
-
+      <% if article.picture.present? %>
+        <%= image_tag(article.picture_url, width: 200, height: 250) %>
+      <% else %>
+        <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <title>Placeholder</title>
+          <rect width="100%" height="100%" fill="#55595c" />
+          <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+        </svg>
+      <% end %>
     </div>
   </div>
 </div>

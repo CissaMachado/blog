@@ -37,7 +37,7 @@ class ArticlesController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
-  
+
 
   def destroy
     if @article.destroy
