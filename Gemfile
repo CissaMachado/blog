@@ -79,5 +79,5 @@ gem 'mini_magick'
 gem 'devise'
 gem 'erb-formatter'
 gem 'simple_form', '~> 5.2'
-
+gem 'rails-controller-testing'
 gem 'net-ssh'

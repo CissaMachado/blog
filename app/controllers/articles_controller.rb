@@ -33,7 +33,7 @@ class ArticlesController < ApplicationController
     if @article.update(article_params)
       redirect_to @article
     else
-      puts @article.errors.full_messages # Imprime mensagens de erro no console
+      puts @article.errors.full_messages
       render :edit, status: :unprocessable_entity
     end
   end
