@@ -64,4 +64,14 @@ end
       expect(response).to be_successful
     end
   end
+  describe 'DELETE#destroy' do
+    it 'excluir artigo com sucesso' do
+      user = User.create!(email: 'test@example.com', password: 'password')
+      article = Article.create!(title: 'Um filme', body: 'Resenha sobre o filme de terror', picture: 'picture', user: user)
+
+      sign_in(user)
+      delete :destroy, params: { id: article.id }
+      expect(response).to redirect_to(root_path)
+    end
+  end
 end
