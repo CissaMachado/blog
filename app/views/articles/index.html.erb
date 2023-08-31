@@ -1,16 +1,22 @@
-<%= render 'long_featured', article: @recent_posts.first %>
-
+<% if @recent_posts.present? %>
+  <%= render "long_featured", article: @recent_posts.first %>
+<% end %>
 <div class="row mb-2">
-  <% @recent_posts.drop(1).each do |post| %>
-    <%= render 'medium_featured', article: post %>
+  <% if @recent_posts.size > 1 %>
+    <% @recent_posts.drop(1).each do |post| %>
+      <%= render "medium_featured", article: post %>
+    <% end %>
   <% end %>
 </div>
-  <div class="row g-5">
-    <div class="col-md-8">
-      <h3 class="pb-4 mb-4 fst-italic border-bottom">
-        From the Firehose
-      </h3>
-       <%= render @articles %>
-      </div>
-      <%= render 'right_side' %>
-    </div>
+
+<div class="row g-5">
+  <div class="col-md-8">
+    <h3 class="pb-4 mb-4 fst-italic border-bottom">
+      From the Firehose
+    </h3>
+    <% if @articles.any? %>
+      <%= render @articles %>
+    <% end %>
+  </div>
+  <%= render "right_side" %>
+</div>

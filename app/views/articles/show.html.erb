@@ -1,20 +1,54 @@
-
-<div class="container mt-5"> <!-- Adiciona espaçamento do topo -->
+<div class="container mt-5">
+  <!-- Adiciona espaçamento do topo -->
   <div class="row justify-content-center">
     <div class="col-md-5">
       <article class="blog-post">
         <h2 class="blog-post-title"><%= @article.title %></h2>
-        <p class="blog-post-meta"><%= day_month_year(@article.created_at) %> - <%= @article.user.email %></p>
+        <p class="blog-post-meta"><%= day_month_year(@article.created_at) %>
+          -
+          <%= @article.user.email %></p>
         <p><%= @article.body %></p>
 
         <div class="btn-group" role="group">
-          <%= link_to 'Back', root_path, class: "btn btn btn-info btn-sm" %>
+          <%= link_to "Back", root_path, class: "btn btn btn-info btn-sm" %>
         </div>
         <div class="btn-group" role="group">
           <%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary btn-sm" %>
         </div>
         <div class="btn-group" role="group">
-          <%= button_to "Destroy this idea", @article, method: :delete, class: "btn btn-secondary btn-sm" %>
+          <%= button_to "Destroy this idea",
+          @article,
+          method: :delete,
+          class: "btn btn-secondary btn-sm" %>
+        </div>
+        <div class="mt-4">
+          <h4>Comments</h4>
+          <% @article.comments.each do |comment| %>
+            <div class="card mb-3">
+              <div class="card-header">
+                <%= comment.user.email %>
+              </div>
+              <div class="card-body">
+                <p class="card-text"><%= comment.body %></p>
+                <div class="btn-group" role="group">
+                  <%= button_to "Destroy this comment",
+                  article_comment_path(@article, comment),
+                  method: :delete,
+                  class: "btn btn-secondary btn-sm" %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="mt-4">
+          <h6>Add Comments:</h6>
+          <%= simple_form_for [ @article, @article.comments.build ] do |f| %>
+            <div class="form-inputs">
+              <%= f.input :body, input_html: { rows: 10 } %>
+            </div>
+            <%= f.button :submit, class: "btn btn-primary mt-3" %>
+          <% end %>
         </div>
       </article>
     </div>

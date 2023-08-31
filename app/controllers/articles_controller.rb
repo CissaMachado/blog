@@ -1,12 +1,17 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_article, only: %i[show edit update destroy]
+
   def index
     @recent_posts = Article.order(created_at: :desc).limit(3)
     @articles = Article.all
   end
 
-  def show; end
+  def show
+    @articles = Article.includes(comments: :user).find(params[:id])
+    # @articles.shift(3)
+    @comments = @article.comments
+  end
 
   def new
     @article = current_user.articles.new
@@ -33,9 +38,11 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article.destroy
-
-    redirect_to root_path
+    if @article.destroy
+      redirect_to root_path, notice: 'Articles Destroyed'
+    else
+      redirect_to root_path, alert: 'Articles not Destroyed'
+    end
   end
 
   private
@@ -45,6 +52,10 @@ class ArticlesController < ApplicationController
   end
 
   def set_article
-    @article = Article.find(params[:id])
+    @article = Article.find_by(id: params[:id])
+
+    return unless @article.nil?
+
+    redirect_to articles_path, alert: 'Article not found.'
   end
 end
