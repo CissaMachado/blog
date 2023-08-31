@@ -9,13 +9,14 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe 'GET#show' do
-  it 'Apresentado com sucesso' do
-    user = User.create!(email: 'test@example.com', password: 'password')
-    article = Article.create!(title: 'x:um filme', body: 'resenha sobre o filme de terror X', picture: 'picture', user: user)
-    get :show, params: { id: article.id }
-    expect(response).to be_successful
+    it 'Apresentado com sucesso' do
+      user = User.create!(email: 'test@example.com', password: 'password')
+      article = Article.create!(title: 'x:um filme', body: 'resenha sobre o filme de terror X', picture: 'picture',
+                                user: user)
+      get :show, params: { id: article.id }
+      expect(response).to be_successful
+    end
   end
-end
 
   describe 'GET#new' do
     it 'assinado um new article' do
@@ -33,9 +34,9 @@ end
       sign_in(user)
       article_params = { title: 'Um filme', body: 'Resenha sobre o filme de terror', picture: 'picture' }
 
-      expect {
+      expect do
         post :create, params: { article: article_params }
-      }.to change(Article, :count).by(1)
+      end.to change(Article, :count).by(1)
 
       expect(response).to redirect_to(assigns(:article))
     end
@@ -44,7 +45,8 @@ end
   describe 'PUT#update' do
     it 'atualiza com sucesso' do
       user = User.create!(email: 'test@example.com', password: 'password')
-      article = Article.create!(title: 'Um filme', body: 'Resenha sobre o filme de terror', picture: 'picture', user: user)
+      article = Article.create!(title: 'Um filme', body: 'Resenha sobre o filme de terror', picture: 'picture',
+                                user: user)
 
       sign_in(user)
       put :update, params: { id: article.id, article: { title: 'Novo título' } }
@@ -57,7 +59,8 @@ end
   describe 'GET#edit' do
     it 'edita artigo com sucesso' do
       user = User.create!(email: 'test@example.com', password: 'password')
-      article = Article.create!(title: 'Um filme', body: 'Resenha sobre o filme de terror', picture: 'picture', user: user)
+      article = Article.create!(title: 'Um filme', body: 'Resenha sobre o filme de terror', picture: 'picture',
+                                user: user)
 
       sign_in(user)
       get :edit, params: { id: article.id }
@@ -67,7 +70,8 @@ end
   describe 'DELETE#destroy' do
     it 'excluir artigo com sucesso' do
       user = User.create!(email: 'test@example.com', password: 'password')
-      article = Article.create!(title: 'Um filme', body: 'Resenha sobre o filme de terror', picture: 'picture', user: user)
+      article = Article.create!(title: 'Um filme', body: 'Resenha sobre o filme de terror', picture: 'picture',
+                                user: user)
 
       sign_in(user)
       delete :destroy, params: { id: article.id }
